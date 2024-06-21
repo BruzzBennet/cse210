@@ -1,3 +1,7 @@
+// I added exceptions in case there were no files to load 
+//as well as if the suer wrote a string were an int was supposed to be. 
+//I also added responses when there was nothing to load and when the user selected a number over 5
+
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO.Enumeration;
