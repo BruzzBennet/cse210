@@ -1,22 +1,26 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 public class SimpleGoal:Goal{
 
-    public bool _isComplete;
+    public bool _isComplete=false;
 
     public SimpleGoal(string name, string desc, int points):base(name,desc,points){
 
     }
 
+    public void Completed(){
+        _isComplete=true;
+    }
+
     public override int RecordEvent()
     {
-        IsComplete();
+        _isComplete=true;
         return _points;
     }
 
     public override bool IsComplete()
     {
-        _isComplete=true;
         return _isComplete;
     }
 

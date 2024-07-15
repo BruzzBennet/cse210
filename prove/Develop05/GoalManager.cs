@@ -7,7 +7,7 @@ using System.IO;
 public class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
-    private int _score = 0;
+    private int _score;
 
     private string number;
 
@@ -172,7 +172,7 @@ public class GoalManager
                 SimpleGoal newgoal = new SimpleGoal(name, desc, points);
                 string completed = parts[4];
                 if (completed == "True")
-                    newgoal.IsComplete();
+                    newgoal.Completed();
                 _goals.Add(newgoal);
             }
             else if (type == "EternalGoal")
