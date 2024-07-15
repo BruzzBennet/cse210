@@ -2,3 +2,5 @@
 SimpleGoal,Ask a girl out ,Make the first move to have a relationship,500,True
 EternalGoal,Do 10K steps,Do 10K steps daily to improve my health,50
 ChecklistGoal,Make a card game deck,Make new content for my card game with a deck,200,2,3,1000
+SimpleGoal,Make a new card back for my game,as the title says,200,False
+ChecklistGoal,Make new cards for MM,Make Legs Transformations,50,0,7,100

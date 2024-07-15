@@ -56,7 +56,7 @@ public class GoalManager
                 Console.WriteLine("  3. Checklist Goal");
                 Console.WriteLine("  Press any other number to go back");
                 int goalchoice = checknumber("Select a choice from the menu: ");
-                if (goalchoice>1 && goalchoice<3)
+                if (goalchoice >= 1 && goalchoice <= 3)
                     CreateGoal(goalchoice);
             }
             else if (choice == 2)
@@ -99,7 +99,7 @@ public class GoalManager
 
     public void ListGoalNames()
     {
-        int num=0;
+        int num = 0;
         foreach (Goal goal in _goals)
         {
             num++;
@@ -109,7 +109,7 @@ public class GoalManager
 
     public void ListGoalDetails()
     {
-        int num=0;
+        int num = 0;
         foreach (Goal goal in _goals)
         {
             num++;
@@ -124,7 +124,7 @@ public class GoalManager
         Console.Write("What is a short description of it? ");
         string desc = Console.ReadLine();
         int points = checknumber("How many points would this goal have? ");
-        if (choice == 1)          
+        if (choice == 1)
             _goals.Add(new SimpleGoal(name, desc, points));
         else if (choice == 2)
             _goals.Add(new EternalGoal(name, desc, points));
@@ -140,7 +140,7 @@ public class GoalManager
     {
         ListGoalNames();
         int eventnum = checknumber("Which goal did you accomplish? ");
-        _score = _score+ _goals[eventnum - 1].RecordEvent();
+        _score = _score + _goals[eventnum - 1].RecordEvent();
     }
 
     public void SaveGoals(string filename)
@@ -148,7 +148,7 @@ public class GoalManager
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
             outputFile.WriteLine(_score);
-            foreach(Goal goal in _goals)
+            foreach (Goal goal in _goals)
                 outputFile.WriteLine(goal.GetStringRepresentation());
         }
     }
@@ -156,35 +156,36 @@ public class GoalManager
     public void LoadGoals(string filename)
     {
         int score = int.Parse(System.IO.File.ReadLines(filename).First());
-        _score=score;
+        _score = score;
         string[] lines = System.IO.File.ReadAllLines(filename);
         lines = lines.Skip(1).ToArray();
         foreach (string line in lines)
         {
             string[] parts = line.Split(",");
-            string type= parts[0];
+            string type = parts[0];
             string name = parts[1];
             string desc = parts[2];
             string pointstring = parts[3];
             int points = int.Parse(pointstring);
-            if (type=="SimpleGoal")
+            if (type == "SimpleGoal")
             {
-                SimpleGoal newgoal = new SimpleGoal(name,desc,points);
-                string completed=parts[4];
-                if (completed=="True")
+                SimpleGoal newgoal = new SimpleGoal(name, desc, points);
+                string completed = parts[4];
+                if (completed == "True")
                     newgoal.IsComplete();
-                _goals.Add(newgoal);                
+                _goals.Add(newgoal);
             }
-            else if (type=="EternalGoal")
-                _goals.Add(new EternalGoal(name,desc,points));
-            else if (type=="ChecklistGoal"){
+            else if (type == "EternalGoal")
+                _goals.Add(new EternalGoal(name, desc, points));
+            else if (type == "ChecklistGoal")
+            {
                 string completedb = parts[4];
                 string targetb = parts[5];
                 string bonusb = parts[6];
-                int completed=int.Parse(completedb);
-                int target=int.Parse(targetb);
-                int bonus=int.Parse(bonusb);
-                CheckListGoal newgoal = new CheckListGoal(name,desc,points,target,bonus);
+                int completed = int.Parse(completedb);
+                int target = int.Parse(targetb);
+                int bonus = int.Parse(bonusb);
+                CheckListGoal newgoal = new CheckListGoal(name, desc, points, target, bonus);
                 newgoal.addAmount(completed);
                 _goals.Add(newgoal);
             }
